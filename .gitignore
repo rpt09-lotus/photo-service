@@ -32,6 +32,3 @@ dist/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-
-#CSV Data File
-database-postgresql/trailphotos.csv
