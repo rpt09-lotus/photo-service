@@ -8,7 +8,7 @@ const photoUrlArray = [];
 
 const getFakerPhotos = () => {
 
-  for (let i = 0; i <= 1000; i++) {
+  for (let i = 0; i <= 10000000; i++) {
     photoUrlArray.push(faker.image.imageUrl(1000, i));
   }
 };
@@ -27,7 +27,7 @@ const csvTrailPhotos = createCsvWriter({
   ]
 });
 
-let totalEntries = 1;
+let totalEntries = 1000;
 
 // Stores 1000 records to be written to CSV file
 const records = [];

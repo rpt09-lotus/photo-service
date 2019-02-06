@@ -6,6 +6,8 @@
 }
 .image {
   padding: 2.5px;
+  width: 100px;
+  height: 100px;
 }
 
 .origImage {

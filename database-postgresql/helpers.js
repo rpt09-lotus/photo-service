@@ -2,16 +2,21 @@ const client = require('./connection');
 let moment = require('moment');
 
 const getPhotos = (trailId, sortOrder, callback) => {
+
+  console.log(trailId);
+ 
   const sortOrderStatement = sortOrder ? `ORDER BY upload_date ${sortOrder}` : '';
 
   const getPhotosPSQLStatement = 'SELECT * FROM trailphotos WHERE trail_id = $1' + sortOrderStatement;
 
   client.query(getPhotosPSQLStatement, [trailId], (err, res) => {
+  
     if (err) {
       let myErr = new Error (err);
       myErr.query = getPhotosPSQLStatement;
       callback(myErr);
     }
+  
     let result = {
       data: res.rows.map(item => {
         let resultItem = {};
@@ -25,6 +30,7 @@ const getPhotos = (trailId, sortOrder, callback) => {
         return resultItem;
       })
     };
+    
     callback(result);
   });
 };
@@ -38,6 +44,7 @@ const getPhotosCount = (trailId, callback) => {
       myErr.query = getPhotosPSQLStatement;
       callback(myErr);
     }
+    
     let result = {
       data: {
         type: 'trail-photos-count',
