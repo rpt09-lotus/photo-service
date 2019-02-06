@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const PhotoSchema = new Schema({
   trail_id: {
     type: Number,
-    required: true
+    required: true,
+    unique: true
   },
   user_id: {
     type: Number,

@@ -27,15 +27,15 @@ Photo.deleteMany({}, function(err) {
   console.log('collection removed'); 
 
   // Batch configuration
-  let batchLimit = 5000;
+  let batchLimit = 50000;
   let batch = 1;
 
   let photosBatch = [];
 
-  // Photo creation set to 5 photos per trail i.e. record
+  // Photo creation set to 5 photos per trail i.e`. record
   const createPhoto = (trailId) => {
 
-    let photosPerTrail = 5;
+    let photosPerTrail = 2;
 
     let hero = false;
 
@@ -64,7 +64,7 @@ Photo.deleteMany({}, function(err) {
   // Batch saver
   const batchSaver = () => {
     return new Promise ((resolve, reject) => {
-      Photo.insertMany(photosBatch, (err, docs) => {
+      db.collection('photos').insertMany(photosBatch, (err, docs) => {
         if (err) {
           reject('error occured in inserting to db: ', err);
         } else {
@@ -76,7 +76,7 @@ Photo.deleteMany({}, function(err) {
 
 
   // Number of total records to be saved to db
-  let records = 1000000;
+  let records = 10000000;
 
   const createRecords = async () => {
   // Loop to create 10m trail Ids 
@@ -86,11 +86,13 @@ Photo.deleteMany({}, function(err) {
       createPhoto(i);
 
       if (photosBatch.length === batchLimit) {
-   
-        await batchSaver();
+        try {
+          await batchSaver();
 
-        photosBatch.length = 0;
-
+          photosBatch.length = 0;
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
     console.log(`Completed saving ${records} primary records to DB`);

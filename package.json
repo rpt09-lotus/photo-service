@@ -22,10 +22,14 @@
     "testUpdate": "npm test -- --updateSnapshot",
     "lint": "eslint $PWD --ext .js,.jsx --fix; exit 0",
     "loadData": "psql trailPhotosDB < database-postgresql/schema.sql",
-    "seedData": "sed -i '' '16,$ d' database-postgresql/schema.sql; node database-postgresql/seed.js; npm run loadData"
+    "seedData": "sed -i '' '16,$ d' database-postgresql/schema.sql; node database-postgresql/seed.js; npm run loadData",
+    "powerSeed": "node database-postgresql/powerseed.js",
+    "powerLoadPsql": "psql trailPhotosDB < database-postgresql/powerschema.sql",
+    "powerloadMongo": "mongo admin --username root --password password database-mongo/powerseed.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "csv-writer": "^1.2.0",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",

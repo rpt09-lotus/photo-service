@@ -27,7 +27,7 @@ const csvTrailPhotos = createCsvWriter({
   ]
 });
 
-let totalEntries = 100;
+let totalEntries = 1;
 
 // Stores 1000 records to be written to CSV file
 const records = [];
