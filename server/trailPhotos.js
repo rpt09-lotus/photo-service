@@ -38,5 +38,17 @@ router.get('/heroPhoto', (req, res, next) => {
   });
 });
 
+router.delete('/deletePhoto', (req, res, next) => {
+
+  console.log(req.params.trailId);
+  db.deletePhotos(req.params.trailId, result => {
+    if (result instanceof Error) {
+      next(result);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 //For testing
 module.exports = router;

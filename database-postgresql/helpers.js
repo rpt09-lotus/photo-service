@@ -80,8 +80,34 @@ const getHeroPhoto = (trailId, callback) => {
   });
 };
 
+const deletePhotos = (trailId, callback) => {
+  const deletePhotosPSQLStatement = 'DELETE FROM trailphotos WHERE trail_id = $1';
+  
+  client.query(deletePhotosPSQLStatement, [trailId], (err, res) => {
+    if (err) {
+      let myErr = new Error (err);
+      myErr.query = deletePhotosPSQLStatement;
+      callback(myErr);
+    }
+    let result = {
+      data: {
+        type: 'trail-photos-delete',
+        attributes: {
+          trail_id: trailId.toString(),
+          count: res.rowCount
+        }
+      }
+    };
+    callback(result);
+  });
+};
+
+
+
+
 module.exports = {
   getPhotos,
   getPhotosCount,
-  getHeroPhoto
+  getHeroPhoto,
+  deletePhotos
 };
