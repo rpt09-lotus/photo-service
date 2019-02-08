@@ -9,6 +9,9 @@ let client = new Client({
   password: process.env.DBPASSWORD
 });
 
+
+
+
 client.connect()
   .catch(err => {
     throw new Error ('Database connection error during initial connection', err);
